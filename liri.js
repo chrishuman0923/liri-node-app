@@ -40,9 +40,14 @@ function concertThis(artist) {
         //No error, loop through data returned
         for(var i = 0; i < concertData.length; i++) {
             //pass venue name data into helper function to be formatted
-            var venue = getVenueName(concertData[i].venue.name);
+            var currI = concertData[i],
+                name = getVenueName(currI.venue.name),
+                loc = getVenueLocation(currI.venue.city, currI.venue.region, currI.venue.country),
+                dte = moment(currI.datetime).format('MMMM DD, YYYY');
 
-            console.log(venue);
+            console.log('Venue Name: ' + name + '\n' + 
+                        'Venue Location: ' + loc + '\n' + 
+                        'Concert Date: ' + dte + '\n');
         }
     });
 }
@@ -55,11 +60,16 @@ function getVenueName(venueString) {
     return name.trim();
 }
 
+function getVenueLocation(city, state, country) {
+    return city.trim() + ', ' + state.trim() + ' ' + country.trim();
+}
+
 /*
 COMMANDS FOR LIRI.JS
-node liri.js concert-this <artist/band name here>
-This will search the Bands in Town Artist Events API ('https://rest.bandsintown.com/artists/' + artist + '/events?app_id=codingbootcamp') for an artist and render the following information about each event to the terminal:
-Name of the venue
-Venue location
-Date of the Event (use moment to format this as 'MM/DD/YYYY')
+node liri.js spotify-this-song '<song name here>'
+
+Artist(s)
+The song's name
+A preview link of the song from Spotify
+The album that the song is from
 */

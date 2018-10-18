@@ -24,7 +24,8 @@ function concertThis(artist) {
             'https://rest.bandsintown.com/artists/',
             artist,
             '/events?app_id=',
-            keys.bandsInTown];
+            keys.bandsInTown
+        ];
 
     //API call for Bands in Town data
     request(url.join(''), function (error, response, data) {

@@ -25,13 +25,25 @@ function concertThis(artist) {
             return console.log(`Error received from Bands in Town API: ${error}`);
         }
 
-        console.log("No Error");
+        //Data returned as string, parse into array of objects
+        var concertData = JSON.parse(data);
 
-        // console.log(response);
-        // for(var i = 0; i < body.length; i++) {
-        //     console.log(data[i].venue);
-        // }
+        //No error, loop through data returned
+        for(var i = 0; i < concertData.length; i++) {
+            //pass venue name data into helper function to be formatted
+            var venue = getVenueName(concertData[i].venue.name);
+
+            console.log(venue);
+        }
     });
+}
+
+function getVenueName(venueString) {
+    //original value is "abc / xyz" and only "xyz" is desired
+    var name = venueString.substring(venueString.indexOf("/") + 1, venueString.length);
+
+    //return formatted string
+    return name.trim();
 }
 
 /*

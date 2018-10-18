@@ -12,14 +12,22 @@ var spotify = new Spotify(keys.spotify),
     cmd = args[2],
     val = args[3];
 
+//Determine which command was passed and execute correct function
 switch (cmd) {
-    case "concert-this":
+    case 'concert-this':
         concertThis(val);
         break;
 }
 
 function concertThis(artist) {
-    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=" + keys.bandsInTown, function (error, response, data) {
+    var url = [
+            'https://rest.bandsintown.com/artists/',
+            artist,
+            '/events?app_id=',
+            keys.bandsInTown];
+
+    //API call for Bands in Town data
+    request(url.join(''), function (error, response, data) {
         //check for an error returned by the API call
         if ((error) || (response.statusCode !== 200)) {
             return console.log(`Error received from Bands in Town API: ${error}`);
@@ -39,8 +47,8 @@ function concertThis(artist) {
 }
 
 function getVenueName(venueString) {
-    //original value is "abc / xyz" and only "xyz" is desired
-    var name = venueString.substring(venueString.indexOf("/") + 1, venueString.length);
+    //original value is 'abc / xyz' and only 'xyz' is desired
+    var name = venueString.substring(venueString.indexOf('/') + 1, venueString.length);
 
     //return formatted string
     return name.trim();
@@ -49,8 +57,8 @@ function getVenueName(venueString) {
 /*
 COMMANDS FOR LIRI.JS
 node liri.js concert-this <artist/band name here>
-This will search the Bands in Town Artist Events API ("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp") for an artist and render the following information about each event to the terminal:
+This will search the Bands in Town Artist Events API ('https://rest.bandsintown.com/artists/' + artist + '/events?app_id=codingbootcamp') for an artist and render the following information about each event to the terminal:
 Name of the venue
 Venue location
-Date of the Event (use moment to format this as "MM/DD/YYYY")
+Date of the Event (use moment to format this as 'MM/DD/YYYY')
 */

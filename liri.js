@@ -31,7 +31,7 @@ function concertThis(artist) {
     request(url.join(''), function (error, response, data) {
         //check for an error returned by the API call
         if ((error) || (response.statusCode !== 200)) {
-            return console.log(`Error received from Bands in Town API: ${error}`);
+            return console.log('Error received from Bands in Town API: ' + error);
         }
 
         //Data returned as string, parse into array of objects
@@ -45,6 +45,7 @@ function concertThis(artist) {
                 loc = getVenueLocation(currI.venue.city, currI.venue.region, currI.venue.country),
                 dte = moment(currI.datetime).format('MMMM DD, YYYY');
 
+            //log data returned in readable format
             console.log('Venue Name: ' + name + '\n' + 
                         'Venue Location: ' + loc + '\n' + 
                         'Concert Date: ' + dte + '\n');

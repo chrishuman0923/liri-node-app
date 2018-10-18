@@ -12,7 +12,27 @@ var spotify = new Spotify(keys.spotify),
     cmd = args[2],
     val = args[3];
 
-console.log(cmd, val);
+switch (cmd) {
+    case "concert-this":
+        concertThis(val);
+        break;
+}
+
+function concertThis(artist) {
+    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=" + keys.bandsInTown, function (error, response, data) {
+        //check for an error returned by the API call
+        if ((error) || (response.statusCode !== 200)) {
+            return console.log(`Error received from Bands in Town API: ${error}`);
+        }
+
+        console.log("No Error");
+
+        // console.log(response);
+        // for(var i = 0; i < body.length; i++) {
+        //     console.log(data[i].venue);
+        // }
+    });
+}
 
 /*
 COMMANDS FOR LIRI.JS

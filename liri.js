@@ -18,7 +18,7 @@ switch (cmd) {
         concertThis(val);
         break;
     case 'spotify-this-song':
-        spotifyThis();
+        spotifyThis(val);
         break;
 }
 
@@ -42,27 +42,29 @@ function concertThis(artist) {
 
         //No error, loop through data returned
         for(var i = 0; i < concertData.length; i++) {
-            //pass venue name data into helper function to be formatted
-            var currI = concertData[i],
-                name = getVenueName(currI.venue.name),
-                loc = getVenueLocation(currI.venue.city, currI.venue.region, currI.venue.country),
-                dte = moment(currI.datetime).format('MMMM DD, YYYY');
+            var venue = concertData[i].venue,
+                //pass data into helper functions to be formatted
+                name = getVenueName(venue.name),
+                loc = getVenueLocation(venue.city, venue.region, venue.country),
+                dte = moment(concertData[i].datetime).format('MMMM DD, YYYY');
 
             //log data returned in readable format
-            console.log('Venue Name: ' + name + '\n' + 
-                        'Venue Location: ' + loc + '\n' + 
-                        'Concert Date: ' + dte + '\n');
+            console.log(
+                'Venue Name: ' + name + '\n' + 
+                'Venue Location: ' + loc + '\n' + 
+                'Concert Date: ' + dte + '\n'
+            );
         }
     });
 }
 
 //helper function to parse the venue name
-function getVenueName(venueString) {
+function getVenueName(val) {
     //original value is 'abc / xyz' and only 'xyz' is desired
-    var name = venueString.substring(venueString.indexOf('/') + 1, venueString.length);
+    var venueName = val.substring(val.indexOf('/') + 1, val.length);
 
     //return formatted string
-    return name.trim();
+    return venueName.trim();
 }
 
 //helper function to format venue location data into one string
@@ -70,8 +72,49 @@ function getVenueLocation(city, state, country) {
     return city.trim() + ', ' + state.trim() + ' ' + country.trim();
 }
 
-function spotifyThis(song) {
+function spotifyThis(track) {
+    spotify.search({
+        type: 'track',
+        query: '"' + track + '"',
+        limit: 1
+    }, function(err, data) {
+        if (err) {
+            return console.log('Error received from Spotify API: ' + err);
+        }
 
+        var resp = data.tracks.items;
+
+        for (var i = 0; i < resp.length; i++) {
+            var trackData = data.tracks.items[i],
+                artistArr = [],
+                title,
+                previewLink,
+                album;
+
+            //get artist(s)
+            trackData.artists.forEach(function(index) {
+                //push value into array
+                artistArr.push(index.name);
+            });
+
+            console.log(
+                'Artist(s): ' + artistArr + '\n'
+            );
+        }
+
+        //artist(s)
+        //data.tracks.items[0].artists[0].name
+
+        //song title
+        //data.tracks.items[0].name
+
+        //preview link
+        //data.tracks.items[0].preview_url
+
+        //album name
+        //data.tracks.items[0].album.name
+
+    });
 }
 
 /*

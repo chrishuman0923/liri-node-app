@@ -17,6 +17,9 @@ switch (cmd) {
     case 'concert-this':
         concertThis(val);
         break;
+    case 'spotify-this-song':
+        spotifyThis();
+        break;
 }
 
 function concertThis(artist) {
@@ -53,6 +56,7 @@ function concertThis(artist) {
     });
 }
 
+//helper function to parse the venue name
 function getVenueName(venueString) {
     //original value is 'abc / xyz' and only 'xyz' is desired
     var name = venueString.substring(venueString.indexOf('/') + 1, venueString.length);
@@ -61,8 +65,13 @@ function getVenueName(venueString) {
     return name.trim();
 }
 
+//helper function to format venue location data into one string
 function getVenueLocation(city, state, country) {
     return city.trim() + ', ' + state.trim() + ' ' + country.trim();
+}
+
+function spotifyThis(song) {
+
 }
 
 /*

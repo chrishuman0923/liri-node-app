@@ -40,7 +40,7 @@ function concertThis(artist) {
             return console.log('Error received from Bands in Town API: ' + error);
         }
 
-        //Data returned as string, parse into array of objects
+        //parse response as JSON object from string
         var concertData = JSON.parse(data);
 
         //No error, loop through data returned
@@ -119,6 +119,14 @@ function spotifyThis(track) {
     });
 }
 
+function getRatingVal (data) {
+    //Returns the value that is returned by the find function
+    return data.Ratings.find(function (item) {
+        //Return first source in array that matches Rotten Tomatoes
+       return item.Source === "Rotten Tomatoes";
+    }).Value;
+}
+
 function movieThis(movie) {
     if (!movie) {
         movie = 'Mr. Nobody';
@@ -140,23 +148,20 @@ function movieThis(movie) {
             return console.log('Error received from OMDB API: ' + error);
         }
 
+        //parse response as JSON object from string
         var movieData = JSON.parse(data);
-        
+
         console.log(
             '--------------------' +
             '\nTitle: ' + movieData.Title +
             '\nRelease Year: ' + movieData.Year +
             '\nIMDB Rating: ' + movieData.imdbRating +
+            '\nRotten Tomatoes Rating: ' + getRatingVal(movieData) +
+            '\nProducing Country: ' + movieData.Country +
+            '\nMovie Language: ' + movieData.Language +
+            '\nPlot: ' + movieData.Plot +
+            '\nActors: ' + movieData.Actors +
             '\n--------------------'
         );      
     });
 }
-
-/*
-COMMANDS FOR LIRI.JS
-    * Rotten Tomatoes Rating of the movie.
-    * Country where the movie was produced.
-    * Language of the movie.
-    * Plot of the movie.
-    * Actors in the movie.
-*/

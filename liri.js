@@ -20,6 +20,9 @@ switch (cmd) {
     case 'spotify-this-song':
         spotifyThis(val);
         break;
+    case 'movie-this':
+        movieThis(val);
+        break;
 }
 
 function concertThis(artist) {
@@ -50,9 +53,11 @@ function concertThis(artist) {
 
             //log data returned in readable format
             console.log(
-                'Venue Name: ' + name + '\n' + 
-                'Venue Location: ' + loc + '\n' + 
-                'Concert Date: ' + dte + '\n'
+                '--------------------' +
+                '\nVenue Name: ' + name +
+                '\nVenue Location: ' + loc +
+                '\nConcert Date: ' + dte +
+                '\n--------------------'
             );
         }
     });
@@ -73,56 +78,85 @@ function getVenueLocation(city, state, country) {
 }
 
 function spotifyThis(track) {
+    if (!track) {
+        track = "'The Sign'";
+    }
+
     spotify.search({
         type: 'track',
-        query: '"' + track + '"',
-        limit: 1
+        query: "'" + track + "'"
     }, function(err, data) {
         if (err) {
             return console.log('Error received from Spotify API: ' + err);
         }
 
+        //create variable at correct level of returned object
         var resp = data.tracks.items;
 
         for (var i = 0; i < resp.length; i++) {
             var trackData = data.tracks.items[i],
                 artistArr = [],
-                title,
-                previewLink,
-                album;
+                previewLink;
 
-            //get artist(s)
+            //get artist(s) portion of response object
             trackData.artists.forEach(function(index) {
                 //push value into array
-                artistArr.push(index.name);
+                artistArr.push(index.name.trim());
             });
 
+            //Formats preview link if not provided by API
+            previewLink = (trackData.preview_url) ? trackData.preview_url : 'Not Provided by API';
+
             console.log(
-                'Artist(s): ' + artistArr + '\n'
+                '--------------------' +
+                '\nArtist(s): ' + artistArr.join(', ') +
+                '\nTitle: ' + trackData.name +
+                '\nAlbum: ' + trackData.album.name +
+                '\nPreview URL: ' + previewLink +
+                '\n--------------------'
             );
         }
+    });
+}
 
-        //artist(s)
-        //data.tracks.items[0].artists[0].name
+function movieThis(movie) {
+    if (!movie) {
+        movie = 'Mr. Nobody';
+    }
 
-        //song title
-        //data.tracks.items[0].name
+    var url = [
+        'https://www.omdbapi.com/?',
+        'apikey=',
+        keys.ombd.appID,
+        '&type=movie',
+        '&r=json',
+        '&t=',
+        movie
+    ];
 
-        //preview link
-        //data.tracks.items[0].preview_url
+    request(url.join(''), function (error, response, data) {
+        //check for an error returned by the API call
+        if ((error) || (response.statusCode !== 200)) {
+            return console.log('Error received from OMDB API: ' + error);
+        }
 
-        //album name
-        //data.tracks.items[0].album.name
-
+        var movieData = JSON.parse(data);
+        
+        console.log(
+            '--------------------' +
+            '\nTitle: ' + movieData.Title +
+            '\nRelease Year: ' + movieData.Year +
+            '\nIMDB Rating: ' + movieData.imdbRating +
+            '\n--------------------'
+        );      
     });
 }
 
 /*
 COMMANDS FOR LIRI.JS
-node liri.js spotify-this-song '<song name here>'
-
-Artist(s)
-The song's name
-A preview link of the song from Spotify
-The album that the song is from
+    * Rotten Tomatoes Rating of the movie.
+    * Country where the movie was produced.
+    * Language of the movie.
+    * Plot of the movie.
+    * Actors in the movie.
 */

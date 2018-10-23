@@ -199,7 +199,7 @@ function doCmdFromFile() {
 
 function writeToFile(log, cmd, val) {
     //Add header to log
-    log = 'Command ' + cmd + ' ' + val + ' logged on ' + moment().format('MMMM DD, YYYY HH:mm:ss ') + '\n' + log + '\n\n';
+    log = 'Command \'' + cmd + '\' -> "' + val + '" logged on ' + moment().format('MMMM DD, YYYY HH:mm:ss ') + '\n' + log + '\n\n';
 
     fs.appendFile('./log.txt', log, 'utf8', function(err, data) {
         if (err) {

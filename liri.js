@@ -9,7 +9,8 @@ var keys = require('./keys'),
 
 //get spotify keys and passed in args
 var spotify = new Spotify(keys.spotify),
-    args = process.argv;
+    args = process.argv,
+    output = '';
 
 //pass cmd into switch statement and execute
 executeCmd(args[2], args[3]);
@@ -18,20 +19,20 @@ executeCmd(args[2], args[3]);
 function executeCmd(cmd, val) {
     switch (cmd) {
         case 'concert-this':
-            concertThis(val);
+            concertThis(cmd, val);
             break;
         case 'spotify-this-song':
-            spotifyThis(val);
+            spotifyThis(cmd, val);
             break;
         case 'movie-this':
-            movieThis(val);
+            movieThis(cmd, val);
             break;
         case 'do-what-it-says':
             doCmdFromFile();
     }
 }
 
-function concertThis(artist) {
+function concertThis(cmd, artist) {
     var url = [
             'https://rest.bandsintown.com/artists/',
             artist,
@@ -40,10 +41,10 @@ function concertThis(artist) {
         ];
 
     //API call for Bands in Town data
-    request(url.join(''), function (error, response, data) {
+    request(url.join(''), function (err, response, data) {
         //check for an error returned by the API call
-        if ((error) || (response.statusCode !== 200)) {
-            return console.log('Error received from Bands in Town API: ' + error);
+        if ((err) || (response.statusCode !== 200)) {
+            return console.log('Error received from Bands in Town API: ' + err);
         }
 
         //parse response as JSON object from string
@@ -57,15 +58,17 @@ function concertThis(artist) {
                 loc = getVenueLocation(venue.city, venue.region, venue.country),
                 dte = moment(concertData[i].datetime).format('MMMM DD, YYYY');
 
-            //log data returned in readable format
-            console.log(
-                '--------------------' +
+            //format data
+            output += '--------------------' +
                 '\nVenue Name: ' + name +
                 '\nVenue Location: ' + loc +
                 '\nConcert Date: ' + dte +
-                '\n--------------------'
-            );
+                '\n--------------------';
         }
+
+        //log data
+        console.log(output);
+        writeToFile(output, cmd, artist);
     });
 }
 
@@ -83,7 +86,7 @@ function getVenueLocation(city, state, country) {
     return city.trim() + ', ' + state.trim() + ' ' + country.trim();
 }
 
-function spotifyThis(track) {
+function spotifyThis(cmd, track) {
     if (!track) {
         track = "'The Sign'";
     }
@@ -110,17 +113,20 @@ function spotifyThis(track) {
             //Formats preview link if not provided by API
             previewLink = (trackData.preview_url) ? trackData.preview_url : 'Not Provided by API';
 
-            console.log(
-                '--------------------' +
+            //format data
+            output += '--------------------' +
                 '\nArtist(s): ' + artistArr.join(', ') +
                 '\nTitle: ' + trackData.name +
                 '\nAlbum: ' + trackData.album.name +
                 '\nPreview URL: ' + previewLink +
-                '\n--------------------'
-            );
+                '\n--------------------';
         }
-    }).catch(function (error) {
-        console.log('Error received from Spotify API: ' + error);
+
+        //log data
+        console.log(output);
+        writeToFile(output, cmd, track);
+    }).catch(function (err) {
+        console.log('Error received from Spotify API: ' + err);
     });
 }
 
@@ -132,7 +138,7 @@ function getRatingVal (data) {
     }).Value;
 }
 
-function movieThis(movie) {
+function movieThis(cmd, movie) {
     if (!movie) {
         movie = 'Mr. Nobody';
     }
@@ -147,17 +153,17 @@ function movieThis(movie) {
         movie
     ];
 
-    request(url.join(''), function (error, response, data) {
+    request(url.join(''), function (err, response, data) {
         //check for an error returned by the API call
-        if ((error) || (response.statusCode !== 200)) {
-            return console.log('Error received from OMDB API: ' + error);
+        if ((err) || (response.statusCode !== 200)) {
+            return console.log('Error received from OMDB API: ' + err);
         }
 
         //parse response as JSON object from string
         var movieData = JSON.parse(data);
 
-        console.log(
-            '--------------------' +
+        //format data
+        output = '--------------------' +
             '\nTitle: ' + movieData.Title +
             '\nRelease Year: ' + movieData.Year +
             '\nIMDB Rating: ' + movieData.imdbRating +
@@ -166,15 +172,18 @@ function movieThis(movie) {
             '\nMovie Language: ' + movieData.Language +
             '\nPlot: ' + movieData.Plot +
             '\nActors: ' + movieData.Actors +
-            '\n--------------------'
-        );      
+            '\n--------------------';
+        
+        //log data
+        console.log(output);
+        writeToFile(output, cmd, movie);
     });
 }
 
 function doCmdFromFile() {
     //read contents of file
-    fs.readFile('./random.txt', 'utf-8', function(error, data) {
-        if (error) {
+    fs.readFile('./random.txt', 'utf-8', function(err, data) {
+        if (err) {
             return console.log('Error reading random.txt file.');
         }
 
@@ -185,5 +194,16 @@ function doCmdFromFile() {
 
         //pass cmd into switch statement and execute
         executeCmd(cmd, val);
+    });
+}
+
+function writeToFile(log, cmd, val) {
+    //Add header to log
+    log = 'Command ' + cmd + ' ' + val + ' logged on ' + moment().format('MMMM DD, YYYY HH:mm:ss ') + '\n' + log + '\n\n';
+
+    fs.appendFile('./log.txt', log, 'utf8', function(err, data) {
+        if (err) {
+            return console.log('Error received: ' + err);
+        }
     });
 }

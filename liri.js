@@ -4,25 +4,31 @@ require('dotenv').config();
 var keys = require('./keys'),
     Spotify = require('node-spotify-api'),
     moment = require('moment'),
-    request = require('request');
+    request = require('request'),
+    fs = require('fs');
 
 //get spotify keys and passed in args
 var spotify = new Spotify(keys.spotify),
-    args = process.argv,
-    cmd = args[2],
-    val = args[3];
+    args = process.argv;
+
+//pass cmd into switch statement and execute
+executeCmd(args[2], args[3]);
 
 //Determine which command was passed and execute correct function
-switch (cmd) {
-    case 'concert-this':
-        concertThis(val);
-        break;
-    case 'spotify-this-song':
-        spotifyThis(val);
-        break;
-    case 'movie-this':
-        movieThis(val);
-        break;
+function executeCmd(cmd, val) {
+    switch (cmd) {
+        case 'concert-this':
+            concertThis(val);
+            break;
+        case 'spotify-this-song':
+            spotifyThis(val);
+            break;
+        case 'movie-this':
+            movieThis(val);
+            break;
+        case 'do-what-it-says':
+            doCmdFromFile();
+    }
 }
 
 function concertThis(artist) {
@@ -84,12 +90,9 @@ function spotifyThis(track) {
 
     spotify.search({
         type: 'track',
-        query: "'" + track + "'"
-    }, function(err, data) {
-        if (err) {
-            return console.log('Error received from Spotify API: ' + err);
-        }
-
+        query: "'" + track + "'",
+        limit: 1
+    }).then(function(data) {
         //create variable at correct level of returned object
         var resp = data.tracks.items;
 
@@ -116,6 +119,8 @@ function spotifyThis(track) {
                 '\n--------------------'
             );
         }
+    }).catch(function (error) {
+        console.log('Error received from Spotify API: ' + error);
     });
 }
 
@@ -163,5 +168,22 @@ function movieThis(movie) {
             '\nActors: ' + movieData.Actors +
             '\n--------------------'
         );      
+    });
+}
+
+function doCmdFromFile() {
+    //read contents of file
+    fs.readFile('./random.txt', 'utf-8', function(error, data) {
+        if (error) {
+            return console.log('Error reading random.txt file.');
+        }
+
+        //split string into array
+        var txtArray = data.split(','),
+            cmd = txtArray[0],
+            val = txtArray[1].replace(/"|'/g,'');
+
+        //pass cmd into switch statement and execute
+        executeCmd(cmd, val);
     });
 }

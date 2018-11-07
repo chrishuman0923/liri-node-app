@@ -1,6 +1,6 @@
 # liri-node-app
 
-The liri bot is a CLI (Command Line Interface) app that uses several node modules and api's to receive commands and output the API responses to the terminal. The app receives commands in a command value format.
+The liri bot is a CLI (Command Line Interface) app that uses several node modules and api's to receive commands and output the API responses to the terminal. The app receives commands in a command value format. A video demonstrating the application is available [here](https://drive.google.com/file/d/1KbQXHPIorspcFchIN83M82-8frT1-yPT/view?usp=sharing).
 
 # Notes
 The following commands are the only valid commands for the app:

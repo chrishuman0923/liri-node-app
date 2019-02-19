@@ -4,25 +4,24 @@ The liri bot is a CLI (Command Line Interface) app that uses several node module
 
 ## Getting Started
 The following commands are the only valid commands for the app:
-
-`node liri.js ` + 
-
-- concert-this
+- `npm run concert -- <arg>`
   - takes an artist name and returnes upcoming concert information
-- spotify-this-song
+- `npm run spotify -- <arg>`
   - takes a song title and returns artist and album information
-- movie-this
+- `npm run movie -- <arg>`
   - takes a movie title and returns movie information
 - do-what-it-says
   - this command allows for the user to pass the one of the other commands and a value into the app from the random.txt file.
-  
+
 The log.txt file records all succesfull runs of the liri bot app.
 
 ## Technologies Used
 - JavaScript
 - Node
 - NPM
+- .Env Variables
 - Moment.js
+- Request.js
 - Spotify API
 - BandsinTown API
 

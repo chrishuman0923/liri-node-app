@@ -2,8 +2,11 @@
   "name": "liri-node-app",
   "version": "1.0.0",
   "description": "Node App using Spotify API",
-  "main": "index.js",
+  "main": "liri.js",
   "scripts": {
+    "concert": "node liri.js concert-this",
+    "movie": "node liri.js movie-this",
+    "spotify": "node liri.js spotify-this-song",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,8 +14,8 @@
     "url": "git+https://github.com/chrishuman0923/liri-node-app.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Chris Human",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/chrishuman0923/liri-node-app/issues"
   },
@@ -22,5 +25,10 @@
     "moment": "^2.22.2",
     "node-spotify-api": "^1.0.7",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
   }
 }

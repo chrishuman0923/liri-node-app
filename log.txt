@@ -1,78 +1,113 @@
-Command 'concert-this' -> "Toby Keith" logged on October 23, 2018 17:55:13 
---------------------
-Venue Name: Red Rocks Casino and Resort
-Venue Location: Las Vegas, NV United States
-Concert Date: October 26, 2018
-----------------------------------------
-Venue Name: Agua Caliente Casino Resort Spa
-Venue Location: Rancho Mirage, CA United States
-Concert Date: October 27, 2018
-----------------------------------------
-Venue Name: Runaway Country
-Venue Location: Kissimmee, Fl, FL United States
-Concert Date: March 22, 2019
-----------------------------------------
-Venue Name: Tree Town Music Festival
-Venue Location: Forest City, IA United States
-Concert Date: May 26, 2019
-----------------------------------------
-Venue Name: Country Thunder USA
-Venue Location: Eau Claire, WI United States
-Concert Date: July 18, 2019
+Command movie-this -> "undefined" logged on February 18, 2019 21:54:23 
+  --------------------
+              
+Title: Mr. Nobody
+              Release Year: 2009
+              
+IMDB Rating: 7.8
+              
+Rotten Tomatoes Rating: undefined
+              
+Producing Country: Belgium, Germany, Canada, France, USA, UK
+              
+Movie Language: English, Mohawk
+              
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+              
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+              
 --------------------
 
-Command 'spotify-this-song' -> "Dirt Road" logged on October 23, 2018 17:55:55 
+Command movie-this -> "undefined" logged on February 18, 2019 21:57:28 
+  --------------------
+              
+Title: Mr. Nobody
+              Release Year: 2009
+              IMDB Rating: 7.8
+              Rotten Tomatoes Rating: [object Object]
+              
+Producing Country: Belgium, Germany, Canada, France, USA, UK
+              
+Movie Language: English, Mohawk
+              
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+              
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+              
 --------------------
+
+Command movie-this -> "undefined" logged on February 18, 2019 22:04:30 
+  --------------------
+              
+Title: Mr. Nobody
+              Release Year: 2009
+              IMDB Rating: 7.8
+              Rotten Tomatoes Rating: 67%
+              
+Producing Country: Belgium, Germany, Canada, France, USA, UK
+              
+Movie Language: English, Mohawk
+              
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+              
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+              
+--------------------
+
+Command movie-this -> "undefined" logged on February 18, 2019 22:05:35 
+  --------------------
+              
+Title: Mr. Nobody
+              Release Year: 2009
+              IMDB Rating: 7.8
+              Rotten Tomatoes Rating: 67%
+              
+Producing Country: Belgium, Germany, Canada, France, USA, UK
+              
+Movie Language: English, Mohawk
+              
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+              
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+              
+--------------------
+
+Command spotify-this-song -> "undefined" logged on February 18, 2019 22:07:33 
+  --------------------'
+                  
+Artist(s): Lil Wayne, Ty Dolla $ign, XXXTENTACION
+                  
+Title: Scared of the Dark (feat. XXXTENTACION)
+                  
+Album: Spider-Man: Into the Spider-Verse (Soundtrack From & Inspired by the Motion Picture)
+                  
+Preview URL: Not Provided by API
+                  
+--------------------
+
+Command spotify-this-song -> "Dirt Road" logged on February 18, 2019 22:08:00 
+  --------------------'
+                  
 Artist(s): Jason Aldean
+                  
 Title: Dirt Road Anthem
+                  
 Album: My Kinda Party
-Preview URL: https://p.scdn.co/mp3-preview/83f2505559e3377f213326f97cf45dea60bd1763?cid=484fc93734544f269da9e23f2e9eee08
+                  
+Preview URL: undefined
+                  
 --------------------
 
-Command 'movie-this' -> "Deadpool" logged on October 23, 2018 17:56:41 
---------------------
-Title: Deadpool
-Release Year: 2016
-IMDB Rating: 8.0
-Rotten Tomatoes Rating: 84%
-Producing Country: USA
-Movie Language: English
-Plot: A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that leaves him with accelerated healing powers and a quest for revenge.
-Actors: Ryan Reynolds, Karan Soni, Ed Skrein, Michael Benyaer
---------------------
-
-Command 'concert-this' -> "Tracy Byrd" logged on October 23, 2018 17:57:23 
---------------------
-Venue Name: Raxx Live Music & Night Club
-Venue Location: Port Allen, LA United States
-Concert Date: October 26, 2018
-----------------------------------------
-Venue Name: The Backyard Bar Stage and Grill
-Venue Location: Waco, TX United States
-Concert Date: November 09, 2018
-----------------------------------------
-Venue Name: First Avenue Club
-Venue Location: Iowa City, IA United States
-Concert Date: December 06, 2018
-----------------------------------------
-Venue Name: Jefferson Theatre
-Venue Location: Beaumont, TX United States
-Concert Date: December 22, 2018
-----------------------------------------
-Venue Name: Gallo Center For the Arts
-Venue Location: Modesto, CA United States
-Concert Date: February 06, 2019
-----------------------------------------
-Venue Name: Arcada Theatre
-Venue Location: St Charles, IL United States
-Concert Date: March 29, 2019
-----------------------------------------
-Venue Name: The Ranch Concert Hall & Saloon
-Venue Location: Fort Myers, FL United States
-Concert Date: March 30, 2019
-----------------------------------------
-Venue Name: Arcada Theatre
-Venue Location: St Charles, IL United States
-Concert Date: April 27, 2019
+Command spotify-this-song -> "Dirt Road" logged on February 18, 2019 22:08:22 
+  --------------------'
+                  
+Artist(s): Jason Aldean
+                  
+Title: Dirt Road Anthem
+                  
+Album: My Kinda Party
+                  
+Preview URL: undefined
+                  
 --------------------
 

@@ -2,7 +2,7 @@
 
 The liri bot is a CLI (Command Line Interface) app that uses several node modules and api's to receive commands and output the API responses to the terminal. The app receives commands in a command value format. A video demonstrating the application is available [here](https://drive.google.com/file/d/1KbQXHPIorspcFchIN83M82-8frT1-yPT/view?usp=sharing).
 
-# Notes
+## Getting Started
 The following commands are the only valid commands for the app:
 - concert-this
   - takes an artist name and returnes upcoming concert information
@@ -15,19 +15,14 @@ The following commands are the only valid commands for the app:
   
 The log.txt file records all succesfull runs of the liri bot app.
 
-# Languages/API's/Concepts Used
+## Technologies Used
 - JavaScript
 - Node
 - NPM
-- Moment JS
-- Require JS
+- Moment.js
 - Spotify API
 - BandsinTown API
 
-# Future Enhancements
+## Future Enhancements
 
 A future enhancement would be the app logging the errors to the log.txt file as well. This would provide a more complete and realistic application.
-
-# Acknowledgments
-
-Big shout out to [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) for posting this Read Me template on github!

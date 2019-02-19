@@ -4,6 +4,9 @@ The liri bot is a CLI (Command Line Interface) app that uses several node module
 
 ## Getting Started
 The following commands are the only valid commands for the app:
+
+`node liri.js ` + 
+
 - concert-this
   - takes an artist name and returnes upcoming concert information
 - spotify-this-song
